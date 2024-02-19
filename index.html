@@ -4,42 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operazioni sul Database</title>
+    <title>Cinema SQL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: #fff;
+            background-image: url('images/giornate.jpg');
+            background-size: cover;
+            opacity: 0.98;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            margin: 80px;
+        }
+
+        .sql-function {
+            padding: 30px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-color: #222;
+        }
+
+        .sql-function h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .sql-function form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sql-function form input[type="text"],
+        .sql-function form input[type="number"],
+        .sql-function form select {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .sql-function form button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sql-function form button:hover {
+            background-color: #0056b3;
+        }
+
+        .title {
+            text-align: center;
+            margin-top: 60px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-color: #222;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        .sql-function form label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
-
-    <h1>Scegli cosa fare</h1>
-
-    <form action="inserisci.php" method="post">
-        <h2>Inserisci Nuovo Attore</h2>
-        Nome:
-        <input type="text" name="nome" required><br>
-        Anno di Nascita:
-        <input type="text" name="anno_nascita" required><br>
-        Nazionalità:
-        <input type="text" name="nazionalita" required><br><br>
-        <input type="submit" value="Inserisci Attore">
-    </form>
-
-    <form action="elimina.php" method="post">
-        <h2>Elimina Proiezione</h2>
-        Codice Proiezione:
-        <input type="text" name="cod_proiezione" required><br><br>
-        <input type="submit" value="Elimina Proiezione">
-    </form>
-
-    <form action="aggiorna.php" method="post">
-        <h2>Aggiorna Voto Recensione</h2>
-        ID Recensione:
-        <input type="text" name="id_recensione" required><br>
-        Nuovo Voto:
-        <input type="text" name="nuovo_voto" required><br><br>
-        <input type="submit" value="Aggiorna Voto">
-    </form>
-
-    <p><a href="index.html">Torna alla Home Page</a></p>
-
+    <div class="title">
+        <h1>Cinema <span style="color:#316caa">SQL</span></h1>
+    </div>
+    <div class="container">
+        <div class="sql-function">
+            <h2>Inserisci <span style="color:#316caa">Attore</span></h2>
+            <form action="./php/inserisci.php" method="POST">
+                <input type="text" name="nome" placeholder="Nome" required>
+                <input type="number" name="anno_nascita" placeholder="Anno di Nascita" required>
+                <input type="text" name="nazionalita" placeholder="Nazionalita" required>
+                <button type="submit">Inserisci</button>
+            </form>
+        </div>
+        <div class="sql-function">
+            <h2>Elimina <span style="color:#316caa">Proiezione</span></h2>
+            <form action="./php/elimina.php" method="POST">
+                <input type="number" name="cod_proiezione" placeholder="Codice Proiezione" required>
+                <button type="submit">Elimina</button>
+            </form>
+        </div>
+        <div class="sql-function">
+            <h2>Aggiorna Voto <span style="color:#316caa">Recensione</span></h2>
+            <form action="./php/aggiorna.php" method="POST">
+                <input type="number" name="id_recensione" placeholder="ID della recensione" required>
+                <input type="number" name="nuovo_voto" placeholder="Nuovo voto">
+                <button type="submit">Aggiorna</button>
+            </form>
+        </div>
+        <div class="sql-function">
+            <h2>Seleziona <span style="color:#316caa">Film</span></h2>
+            <form action="./php/mostra_film.php" method="POST">
+                <label for="titolo"><input type="checkbox" name="campi[]" value="Titolo" id="titolo">Titolo</label>
+                <label for="anno"><input type="checkbox" name="campi[]" value="AnnoProduzione" id="anno">Anno Produzione</label>
+                <label for="nazionalita"><input type="checkbox" name="campi[]" value="Nazionalita" id="nazionalita">Nazionalita</label>
+                <label for="regista"><input type="checkbox" name="campi[]" value="Regista" id="regista">Regista</label>
+                <label for="genere"><input type="checkbox" name="campi[]" value="Genere" id="genere">Genere</label>
+                <button type="submit">Mostra campi selezionati</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
